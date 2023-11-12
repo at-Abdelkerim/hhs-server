@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Abdelkerim Ahmed" />
+    <meta http-equiv="Content-Language" content="en" />
+    <meta name="description" content="" />
+    <meta
+      name="keywords"
+      content="harbu, harbu highschool, harbu school, harbu education"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
+    />
+    <title>Harbu Highschool</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+
+  <body class="h-screen overflow-hidden flex flex-col">
+    <header class="absolute inset-x-0 top-0 h-16 px-2 backdrop-blur-xl flex">
+      <div class="relative flex-1 px-2 flex items-center space-x-2">
+        <a
+          href="https://harbuhighschool.edu.et"
+          class="max-lg:hidden w-12 h-12 p-1 border border-blue-300 hover:text-blue-500 rounded-lg"
+        >
+          <img src="vite.svg" alt="" class="w-full h-full" />
+        </a>
+        <button role="button" id="menu-btn" class="lg:hidden border rounded">
+          <img src="vite.svg" alt="" class="w-10 h-10" />
+        </button>
+        <nav
+          id="nav"
+          class="max-lg:hidden max-lg:absolute max-lg:top-16 max-lg:left-2 bg-blue-100 rounded-lg overflow-hidden lg:flex max-lg:flex-col"
+        >
+          <a href="#home" class="active"> Home </a>
+          <a href="#about" class="non-active"> About </a>
+          <a href="#mission" class="non-active"> Mission </a>
+          <a href="#vision" class="non-active"> Vision </a>
+        </nav>
+      </div>
+      <div class="flex items-center">
+        <a
+          href="http://localhost:4000/app/<%=platform %>"
+          class="w-32 lg:w-40 p-2 bg-green-500 rounded-lg hover:shadow-md hover:shadow-green-600 text-white text-center lg:text-xl font-semibold"
+        >
+          Download App
+        </a>
+      </div>
+    </header>
+    <main id="main" class="flex-1 mt-16 overflow-x-scroll">
+      <section id="home" class="h-full flex flex-col">
+        <div class="basis-1/3 flex justify-center items-center">
+          <img src="vite.svg" alt="" class="w-44 h-44" />
+        </div>
+        <div class="flex-1">
+          <p
+            class="py-10 text-4xl lg:text-7xl text-center font-extrabold max-lg:flex max-lg:flex-col"
+          >
+            <span
+              class="bg-gradient-to-t bg-clip-text from-cyan-500 via-pink-500 to-indigo-500 max-lg:text-6xl"
+            >
+              <span class="text-transparent">Welcome</span>
+            </span>
+            <span
+              class="bg-gradient-to-r bg-clip-text from-cyan-500 via-pink-500 to-indigo-500"
+            >
+              <span class="text-transparent">to</span>
+            </span>
+            <span
+              class="bg-gradient-to-r bg-clip-text from-orange-500 via-green-500 to-yellow-500"
+            >
+              <span class="text-transparent">Harbu Highschool</span>
+            </span>
+          </p>
+          <p class="px-5 lg:px-64 text-teal-500 text-2xl text-center">
+            Community created roadmaps, articles, resources and journeys to help
+            you choose your path and grow in your career.
+          </p>
+        </div>
+      </section>
+      <section
+        id="about"
+        class="h-full p-5 lg:p-10 flex max-lg:flex-col lg:space-x-10"
+      >
+        <div class="flex-1 flex justify-center">
+          <img src="vite.svg" alt="" class="h-full max-sm:w-full" />
+        </div>
+        <div class="flex-1 p-5 flex flex-col lg:justify-center">
+          <p class="text-xl sm:text-2xl font-semibold lg:font-bold">About</p>
+          <p class="sm:text-xl">
+            Community created roadmaps, articles, resources and journeys to help
+            you choose your path and grow in your career.The leading DevOps
+            resource for Kubernetes, cloud-native computing, and the latest in
+            at-scale development, deployment, and management.The leading DevOps
+            resource for Kubernetes, cloud-native computing, and the latest in
+            at-scale development, deployment, and management.
+          </p>
+        </div>
+      </section>
+      <section
+        id="mission"
+        class="h-full p-5 lg:p-10 flex max-lg:flex-col-reverse lg:space-x-10"
+      >
+        <div class="flex-1 p-5 flex flex-col lg:justify-center">
+          <p class="text-xl sm:text-2xl font-semibold lg:font-bold">Mission</p>
+          <p class="sm:text-xl">
+            Community created roadmaps, articles, resources and journeys to help
+            you choose your path and grow in your career.The leading DevOps
+            resource for Kubernetes, cloud-native computing, and the latest in
+            at-scale development, deployment, and management.The leading DevOps
+            resource for Kubernetes, cloud-native computing, and the latest in
+            at-scale development, deployment, and management.
+          </p>
+        </div>
+        <div class="flex-1 flex justify-center">
+          <img src="vite.svg" alt="" class="max-sm:w-full h-full" />
+        </div>
+      </section>
+      <section
+        id="vision"
+        class="h-full p-5 lg:p-10 flex max-lg:flex-col lg:space-x-10"
+      >
+        <div class="flex-1 flex justify-center">
+          <img src="vite.svg" alt="" class="max-sm:w-full h-full" />
+        </div>
+        <div class="flex-1 p-5 flex flex-col lg:justify-center">
+          <p class="text-xl sm:text-2xl font-semibold lg:font-bold">Vision</p>
+          <p class="sm:text-xl">
+            Community created roadmaps, articles, resources and journeys to help
+            you choose your path and grow in your career.The leading DevOps
+            resource for Kubernetes, cloud-native computing, and the latest in
+            at-scale development, deployment, and management.The leading DevOps
+            resource for Kubernetes, cloud-native computing, and the latest in
+            at-scale development, deployment, and management.
+          </p>
+        </div>
+      </section>
+
+      <footer
+        id="footer"
+        class="max-lg:min-h-full lg:h-[60%] p-10 bg-gray-900 text-gray-300 flex flex-col"
+      >
+        <div class="flex-1 flex max-lg:flex-col max-lg:items-center">
+          <div class="flex-1 flex flex-col">
+            <p class="max-lg:text-center text-gray-400 font-bold uppercase">
+              address
+            </p>
+            <div class="flex flex-col max-lg:items-center mb-5">
+              <p class="">Harbu Highschool</p>
+              <p class="">+251335520000</p>
+              <p class="">abdelkerim@gmail.com</p>
+            </div>
+          </div>
+          <div class="flex-1 flex flex-col">
+            <p class="max-lg:text-center text-gray-400 font-bold uppercase">
+              director
+            </p>
+            <div class="flex flex-col max-lg:items-center mb-5">
+              <p class="">Abdelkerim Ahmed</p>
+              <p class="">+251335520000</p>
+              <p class="">abdelkerim@gmail.com</p>
+            </div>
+            <div class="flex flex-col max-lg:items-center mb-5">
+              <p class="">Abdelkerim Ahmed</p>
+              <p class="">+251335520000</p>
+              <p class="">abdelkerim@gmail.com</p>
+            </div>
+          </div>
+          <div class="flex-1 flex flex-col">
+            <p class="max-lg:text-center text-gray-400 font-bold uppercase">
+              developers
+            </p>
+            <div class="flex flex-col max-lg:items-center mb-5">
+              <p class="">Abdelkerim Ahmed</p>
+              <p class="">+251945467896</p>
+              <p class="">+251707441019</p>
+              <p class="">at.abdelkerim@gmail.com</p>
+            </div>
+            <div class="flex flex-col max-lg:items-center mb-5">
+              <p class="">Mahmud Mohammed</p>
+              <p class="">+251963</p>
+              <p class="">+2517</p>
+              <p class="">mahmud@gmail.com</p>
+            </div>
+          </div>
+          <div class="flex-1 flex flex-col">
+            <p class="max-lg:text-center text-gray-400 font-bold uppercase">
+              more
+            </p>
+            <div class="flex flex-col max-lg:items-center mb-5">
+              <a
+                href="https://harbuhighschool.edu.et/privacy_policy"
+                class="hover:text-white"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="https://harbuhighschool.edu.et/terms_of_service"
+                class="hover:text-white"
+              >
+                Terms of Service
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="basis-1/4 flex justify-center items-center">
+          <p class="">Copyright &copy; 2023 Abdelkerim Ahmed</p>
+        </div>
+      </footer>
+    </main>
+    <script>
+      const navDeskChildren = document.querySelector("#nav").children;
+      const main = document.querySelector("#main");
+      const children = main.children;
+
+      main.addEventListener("scroll", () => {
+        Array(children.length - 1)
+          .fill(null)
+          .map((_, index) => {
+            const temp = children[index].getBoundingClientRect();
+            if (
+              temp.top > 64 - temp.height / 2 &&
+              temp.top < 64 + temp.height / 2
+            ) {
+              navDeskChildren[index].className
+                ? (navDeskChildren[index].className = "active")
+                : navDeskChildren[index].setAttribute(className, "active");
+            } else {
+              navDeskChildren[index].className
+                ? (navDeskChildren[index].className = "non-active")
+                : navDeskChildren[index].setAttribute(className, "non-active");
+            }
+          });
+      });
+      let isOpen = false;
+      const menuBtn = document.querySelector("#menu-btn");
+      menuBtn.addEventListener("click", () => {
+        if (isOpen) {
+          document.querySelector("#nav").style.display = "none";
+          isOpen = false;
+        } else {
+          document.querySelector("#nav").style.display = "flex";
+          isOpen = true;
+        }
+      });
+    </script>
+  </body>
+</html>
