@@ -7,20 +7,20 @@ export default async (_, { tel, password }, { models: { User } }) => {
     if (user.password == password) {
       return {
         accessToken: jwt.sign(
-          { id: user.id, role: user.role },
+          { _id: user.id, role: user.role },
           process.env.ACCESS_TOKEN
         ),
         refreshToken: jwt.sign(
-          { id: user.id, role: user.role },
+          { _id: user.id, role: user.role },
           process.env.REFRESH_TOKEN
         ),
       };
     }
-    throw new GraphQLError("Please fill correct Password", {
-      extensions: { code: "INVALID PASSWORD" },
+    throw new GraphQLError("Please fill valid Password", {
+      extensions: { code: "INVALIDPASSWORD" },
     });
   }
-  throw new GraphQLError("Please fill correct tel", {
-    extensions: { code: "INVALID TEL" },
+  throw new GraphQLError("Please fill valid tel", {
+    extensions: { code: "INVALIDTEL" },
   });
 };

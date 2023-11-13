@@ -36,15 +36,17 @@ app.use(
       let result = {
         models,
       };
-      const token =
-        req.headers.authorization?.split(" ")[1] ||
-        req.headers.Authorization?.split(" ")[1] ||
-        "";
+      const token = req.headers.authorization || req.headers.Authorization;
       if (token) {
         try {
-          const { id, role } = jwt.verify(token, process.env.ACCESS_TOKEN);
-          result = { ...result, user: { id, role } };
-        } catch (err) {}
+          const { _id, role } = jwt.verify(
+            token.split(" ").length == 2 ? token.split(" ")[1] : token,
+            process.env.ACCESS_TOKEN
+          );
+          result = { ...result, user: { _id, role } };
+        } catch (err) {
+          console.error(err);
+        }
       }
       return result;
     },
@@ -52,13 +54,7 @@ app.use(
 );
 
 await connect(process.env.DB);
-await new Promise((resolve, reject) =>
+await new Promise((resolve) =>
   httpServer.listen({ port: process.env.PORT }, resolve)
 );
 console.log(`🚀 Server ready at http://localhost:${process.env.PORT}/`);
-
-const { Teacher } = models;
-// const temp = await Teacher.findById("65504b640698781c2e4f0ff5");
-// temp.gender = "male";
-// await temp.save();
-// console.log(temp);

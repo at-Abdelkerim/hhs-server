@@ -1,25 +1,78 @@
 import { model, Schema, SchemaTypes } from "mongoose";
 
+const name = new Schema({
+  first: {
+    type: String,
+    lowercase: true,
+    required: true,
+  },
+  father: {
+    type: String,
+    lowercase: true,
+    required: true,
+  },
+  last: {
+    type: String,
+    lowercase: true,
+    required: true,
+  },
+});
+const address = new Schema({
+  region: {
+    type: String,
+    lowercase: true,
+    required: true,
+    default: "amhara",
+  },
+  zone: {
+    type: String,
+    lowercase: true,
+    required: true,
+    default: "south wollo",
+  },
+  wereda: {
+    type: String,
+    lowercase: true,
+    required: true,
+    default: "harbu",
+  },
+  kebele: {
+    type: Number,
+    min: 1,
+    max: 100,
+    required: true,
+  },
+  subKebele: {
+    type: Number,
+    min: 1,
+    max: 50,
+    required: true,
+  },
+});
+
 export default {
   User: new model(
     "user",
-    Schema({
+    new Schema({
       id: {
         type: SchemaTypes.ObjectId,
         required: true,
       },
       role: {
         type: String,
+        lowercase: true,
         required: true,
       },
       tel: {
         type: Number,
         min: 700000000,
         max: 999999999,
+        unique: true,
         required: true,
       },
       password: {
         type: String,
+        lowercase: true,
         required: true,
       },
     })
@@ -28,117 +81,53 @@ export default {
   Teacher: new model(
     "teacher",
     new Schema({
-      name: {
-        first: {
-          type: String,
-          required: true,
-        },
-        father: {
-          type: String,
-          required: true,
-        },
-        last: {
-          type: String,
-          required: true,
-        },
-      },
+      name: name,
       gender: {
         type: String,
+        lowercase: true,
         required: true,
+        enum: ["male", "female"],
       },
       birthDate: {
         type: Date,
         required: true,
       },
-      address: {
-        region: {
-          type: String,
-          required: true,
-        },
-        zone: {
-          type: String,
-          required: true,
-        },
-        wereda: {
-          type: String,
-          required: true,
-        },
-        kebele: {
-          type: Number,
-          min: 1,
-          max: 100,
-          required: true,
-        },
-        subKebele: {
-          type: Number,
-          min: 1,
-          max: 50,
-          required: true,
-        },
-      },
+      address: address,
       department: {
         type: SchemaTypes.ObjectId,
         required: true,
         ref: "department",
+      },
+      homeRoom: {
+        type: SchemaTypes.ObjectId,
+        unique: true,
+        ref: "class",
       },
     })
   ),
   Student: new model(
     "student",
     new Schema({
-      name: {
-        first: {
-          type: String,
-          required: true,
-        },
-        father: {
-          type: String,
-          required: true,
-        },
-        last: {
-          type: String,
-          required: true,
-        },
-      },
+      name: name,
       gender: {
         type: String,
+        lowercase: true,
         required: true,
+        enum: ["male", "female"],
       },
       birthDate: {
         type: Date,
         required: true,
       },
-      address: {
-        region: {
-          type: String,
+      address: address,
+      reference: [
+        {
+          type: SchemaTypes.ObjectId,
           required: true,
+          unique: true,
+          ref: "parent",
         },
-        zone: {
-          type: String,
-          required: true,
-        },
-        wereda: {
-          type: String,
-          required: true,
-        },
-        kebele: {
-          type: Number,
-          min: 1,
-          max: 100,
-          required: true,
-        },
-        subKebele: {
-          type: Number,
-          min: 1,
-          max: 50,
-          required: true,
-        },
-      },
-      reference: {
-        type: SchemaTypes.ObjectId,
-        required: true,
-        ref: "parent",
-      },
+      ],
       class: {
         type: SchemaTypes.ObjectId,
         required: true,
@@ -149,59 +138,26 @@ export default {
   Parent: new model(
     "parent",
     new Schema({
-      name: {
-        first: {
-          type: String,
-          required: true,
-        },
-        father: {
-          type: String,
-          required: true,
-        },
-        last: {
-          type: String,
-          required: true,
-        },
-      },
+      name: name,
       gender: {
         type: String,
+        lowercase: true,
         required: true,
+        enum: ["male", "female"],
       },
       birthDate: {
         type: Date,
         required: true,
       },
-      address: {
-        region: {
-          type: String,
+      address: address,
+      child: [
+        {
+          type: SchemaTypes.ObjectId,
+          unique: true,
           required: true,
+          ref: "student",
         },
-        zone: {
-          type: String,
-          required: true,
-        },
-        wereda: {
-          type: String,
-          required: true,
-        },
-        kebele: {
-          type: Number,
-          min: 1,
-          max: 100,
-          required: true,
-        },
-        subKebele: {
-          type: Number,
-          min: 1,
-          max: 50,
-          required: true,
-        },
-      },
-      child: {
-        type: SchemaTypes.ObjectId,
-        required: true,
-        ref: "student",
-      },
+      ],
     })
   ),
   Class: new model(
@@ -211,23 +167,37 @@ export default {
         type: Number,
         min: 9,
         max: 12,
-        required: true,
         immutable: true,
-        default: () => 9,
+        required: true,
+        default: 9,
       },
       section: {
         type: String,
-        maxLength: 2,
-        required: true,
+        lowercase: true,
+        maxLength: 1,
         immutable: true,
+        required: true,
       },
       stream: {
         type: String,
-        required: true,
+        lowercase: true,
         immutable: true,
-        default: () => "common",
+        required: true,
+        enum: ["common", "natural", "social"],
+        default: "common",
       },
-      homeRoomTeacher: SchemaTypes.ObjectId,
+      homeRoomTeacher: {
+        type: SchemaTypes.ObjectId,
+        unique: true,
+        ref: "teacher",
+      },
+      teachers: [
+        {
+          type: SchemaTypes.ObjectId,
+          unique: true,
+          ref: "teacher",
+        },
+      ],
     })
   ),
   Department: new model(
@@ -235,9 +205,16 @@ export default {
     new Schema({
       name: {
         type: String,
+        lowercase: true,
+        unique: true,
+        immutable: true,
         required: true,
       },
-      head: SchemaTypes.ObjectId,
+      head: {
+        type: SchemaTypes.ObjectId,
+        unique: true,
+        ref: "teacher",
+      },
     })
   ),
 };

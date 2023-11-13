@@ -1,13 +1,12 @@
 export default `#graphql 
-    directive @auth(role:Role=user) on  FIELD_DEFINITION | OBJECT
-    enum Role {
-        user
+    directive @auth(role:[Role]) on  OBJECT | FIELD_DEFINITION
+    enum Role { 
         director
         registrar
         teacher
         student
         parent
-    }
+    } 
     enum Gender {
         male
         female
@@ -45,23 +44,23 @@ export default `#graphql
         kebele:Int!
         subKebele:Int!
     } 
-    type Teacher {
-        _id:ID!
-        name:Name!
-        gender:Gender!
-        birthDate:String!
-        address:Address!
-        department:String!
-        homeRoom:String
-    } 
+    type Teacher @auth {
+        _id:ID! 
+        name:Name! 
+        gender:Gender! @auth(role:[registrar,director])
+        birthDate:String! @auth(role:[registrar,director])
+        address:Address! @auth(role:[registrar,director])
+        department:ID! 
+        homeRoom:ID @auth(role:[registrar,director])
+    }
     type Student {
         _id:ID!
         name:Name!
         gender:Gender!
         birthDate:String!
         address:Address!
-        refrence:[String!]
-        class:String!
+        refrence:[ID!]!
+        class:ID!
     }
     type Parent {
         _id:ID!
@@ -69,31 +68,32 @@ export default `#graphql
         gender:Gender!
         birthDate:String!
         address:Address!
-        children:[String!]!
+        children:[ID!]!
     }
     type Class {
         _id:ID!
         grade:Int!
         section:String!
         stream:Stream!
-        homeRoomTeacher:String
-        teachers:[String!]
+        homeRoomTeacher:ID
+        teachers:[ID!]
     }
     type Department {
         _id:ID!
         name:String!
-        head:String
+        head:ID
     }
     type Query {
         token(tel:Int!,password:String!):Token! 
         teachers(
-            _id:ID
-            name:NameInput
-            gender:Gender
-            birthDate:String
-            address:AddressInput
-            department:String
-            homeRoom:String
-        ):[Teacher!] @auth
+            _id:ID 
+            name:NameInput 
+            gender:Gender 
+            birthDate:String 
+            address:AddressInput 
+            department:ID 
+            homeRoom:ID 
+        ):[Teacher!]! 
+        
     }
 `;
