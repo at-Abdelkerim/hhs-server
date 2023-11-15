@@ -1,12 +1,5 @@
 export default `#graphql 
-    directive @auth(role:[Role]) on  OBJECT | FIELD_DEFINITION
-    enum Role { 
-        director
-        registrar
-        teacher
-        student
-        parent
-    } 
+    directive @auth on  OBJECT | FIELD_DEFINITION
     enum Gender {
         male
         female
@@ -43,17 +36,26 @@ export default `#graphql
         wereda:String!
         kebele:Int!
         subKebele:Int!
-    } 
-    type Teacher @auth {
+    }
+    type TeacherSome {
         _id:ID! 
         name:Name! 
-        gender:Gender! @auth(role:[registrar,director])
-        birthDate:String! @auth(role:[registrar,director])
-        address:Address! @auth(role:[registrar,director])
         department:ID! 
-        homeRoom:ID @auth(role:[registrar,director])
     }
-    type Student {
+    type TeacherMore  {
+        _id:ID! 
+        name:Name! 
+        gender:Gender! 
+        birthDate:String!
+        address:Address! 
+        department:ID! 
+        homeRoom:ID 
+    }
+    type StudentSome {
+        _id:ID!
+        name:Name!
+    }
+    type StudentMore {
         _id:ID!
         name:Name!
         gender:Gender!
@@ -62,15 +64,23 @@ export default `#graphql
         refrence:[ID!]!
         class:ID!
     }
-    type Parent {
+    type ParentSome {
+        _id:ID!
+        name:Name!
+    }
+    type ParentMore {
         _id:ID!
         name:Name!
         gender:Gender!
         birthDate:String!
         address:Address!
-        children:[ID!]!
+        child:[ID!]!
     }
-    type Class {
+    type ClassSome {
+        _id:ID!
+        grade:Int!
+    }
+    type ClassMore {
         _id:ID!
         grade:Int!
         section:String!
@@ -78,11 +88,29 @@ export default `#graphql
         homeRoomTeacher:ID
         teachers:[ID!]
     }
-    type Department {
+    type DepartmentSome {
+        _id:ID!
+        name:String!
+    }
+    type DepartmentMore {
         _id:ID!
         name:String!
         head:ID
     }
+    type Schedule {
+        _id:ID!
+    }
+    type Attendance {
+        _id:ID!
+    }
+    type Assignment {
+        _id:ID!
+    }
+    union Teacher = TeacherMore | TeacherSome
+    union Student = StudentMore | StudentSome
+    union Parent = ParentMore | ParentSome
+    union Class = ClassMore | ClassSome
+    union Department = DepartmentMore | DepartmentSome 
     type Query {
         token(tel:Int!,password:String!):Token! 
         teachers(
@@ -92,8 +120,38 @@ export default `#graphql
             birthDate:String 
             address:AddressInput 
             department:ID 
-            homeRoom:ID 
-        ):[Teacher!]! 
+            homeRoom:ID
+        ):[Teacher!]! @auth
+        students(
+            _id:ID 
+            name:NameInput 
+            gender:Gender 
+            birthDate:String 
+            address:AddressInput 
+            reference:[ID] 
+            class:ID
+        ):[Student!]! @auth
+        parents(
+            _id:ID 
+            name:NameInput 
+            gender:Gender 
+            birthDate:String 
+            address:AddressInput 
+            child:[ID] 
+        ):[Parent!]! @auth
+        classes(
+            _id:ID!
+            grade:Int!
+            section:String!
+            stream:Stream!
+            homeRoomTeacher:ID
+            teachers:[ID!]
+        ):[Class!]! @auth
+        departments(
+            _id:ID!
+            name:String!
+            head:ID
+        ):[Department!]! @auth
         
     }
 `;
