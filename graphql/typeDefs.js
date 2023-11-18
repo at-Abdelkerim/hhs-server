@@ -51,17 +51,32 @@ export default `#graphql
         department:ID! 
         homeRoom:ID 
     }
-    type StudentSome {
+    interface Student {
         _id:ID!
         name:Name!
     }
-    type StudentMore {
+    type StudentForStudent implements Student {
+        _id:ID!
+        name:Name!
+    }
+    type StudentForParent  implements Student {
+        _id:ID!
+        name:Name!
+        reference:[ID!]! 
+        class:ID!
+    }
+    type StudentForTeacher implements Student {
+        _id:ID!
+        name:Name!
+        reference:[ID!]! 
+    }
+    type StudentForAdmin implements Student {
         _id:ID!
         name:Name!
         gender:Gender!
         birthDate:String!
         address:Address!
-        refrence:[ID!]!
+        reference:[ID!]!
         class:ID!
     }
     type ParentSome {
@@ -79,6 +94,8 @@ export default `#graphql
     type ClassSome {
         _id:ID!
         grade:Int!
+        section:String!
+        stream:Stream!
     }
     type ClassMore {
         _id:ID!
@@ -107,7 +124,7 @@ export default `#graphql
         _id:ID!
     }
     union Teacher = TeacherMore | TeacherSome
-    union Student = StudentMore | StudentSome
+    #union Student = StudentMore | StudentSome
     union Parent = ParentMore | ParentSome
     union Class = ClassMore | ClassSome
     union Department = DepartmentMore | DepartmentSome 

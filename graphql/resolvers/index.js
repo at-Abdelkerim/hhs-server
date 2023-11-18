@@ -1,7 +1,7 @@
 import fs from "fs";
 
 export default {
-	...["Teacher", "Student", "Parent", "Class", "Department"].reduce(
+	...["Teacher", "Parent", "Class", "Department"].reduce(
 		(result, current) => {
 			return {
 				...result,
@@ -27,6 +27,22 @@ export default {
 		},
 		{}
 	),
+	Student: {
+		__resolveType(source, { user: { role } }, info) {
+			if (role == "registrar" || role == "director")
+				return "StudentForAdmin";
+			else if (role == "teacher") {
+				return "StudentForTeacher";
+			} else if (role == "student") {
+				return "StudentForStudent";
+			} else if (role == "parent") {
+				return "StudentForParent";
+			}
+			throw new GraphQLError("You have no access to get this data", {
+				extensions: { code: "UNAUTHORIZED" },
+			});
+		},
+	},
 	Query: await fs
 		.readdirSync("./graphql/resolvers/query")
 		.reduce(async (query, file) => {

@@ -1,0 +1,24 @@
+teachers
+    registrar
+    director
+    teacher
+    student
+    parent          //
+students
+    registrar
+    director        //
+    teacher         //
+    student         //
+    parent          //
+parents
+    registrar
+    director
+    teacher
+    student
+    parent
+classes
+    registrar
+    director
+    teacher
+    student
+    parent
